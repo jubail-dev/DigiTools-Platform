@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import './App.css'
 import Hero from './components/hero/Hero'
 import Nav from './components/navbar/Nav'
@@ -13,6 +13,8 @@ const productPromiseData = async () :Promise<ProductType[]> => {
 }
 
 function App() {
+
+  const [productPromise] = useState(()=> productPromiseData())
 
 
   return (

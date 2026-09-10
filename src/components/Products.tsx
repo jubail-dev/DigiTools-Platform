@@ -13,8 +13,9 @@ const Products = ({ productPromise }: ProductsProps) => {
     const [buttonType,setButtonType] = useState("available")
     const handleSelectedButton = (type : "available" | "selected") => {
         setButtonType(type)
-    }
-    
+    } 
+
+    const [selected,setSelected] = useState<ProductType[]>([])
     return(
         <>
             <div className="my-20">
@@ -28,7 +29,7 @@ const Products = ({ productPromise }: ProductsProps) => {
                       <button 
                       className={`font-bold py-2 px-6 rounded-full ${buttonType === "selected" ? "bg-green-500 text-white" : "bg-gray-300 text-black"}`}
                       onClick={() => handleSelectedButton("selected")}
-                      >Cart</button>
+                      >{selected.length === 0 ? "Cart" : `Cart(${selected.length})`}</button>
                   </div>
                </div>
             </div>
@@ -37,10 +38,10 @@ const Products = ({ productPromise }: ProductsProps) => {
                 buttonType === "available"
               ?  <div className="grid grid-cols-3 gap-3 container mx-auto">
                    {
-                     products.map((product:ProductType,index:number) => <Available product = {product} key={index}></Available>)
+                     products.map((product:ProductType,index:number) => <Available  product = {product} key={index} selected={selected} setSelected ={setSelected}></Available>)
                   }
                 </div>
-                : <SelectedCart></SelectedCart>
+                : <SelectedCart selected = {selected} setSelected = {setSelected} ></SelectedCart>
             }       
         </>
     )
