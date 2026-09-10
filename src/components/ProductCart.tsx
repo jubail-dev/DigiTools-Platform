@@ -1,5 +1,6 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
 import type { ProductType } from "./types/types";
+import { Bounce, toast } from "react-toastify";
 
 export interface ProductCartProps {
     product: ProductType
@@ -13,8 +14,20 @@ const ProductCart = ({ product,selected,setSelected }: ProductCartProps) => {
 
       const [isSelected,setIsSelected] = useState<boolean>(false)
       const handleSelectPlayer = () => {
-        setIsSelected(!isSelected)
+        setIsSelected(true)
         setSelected([...selected,product])
+        
+      toast.success(`SuccesFully Added to Cart ${product.title}`, {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
       }
 
     

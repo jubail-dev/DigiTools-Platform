@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 import './App.css'
 import Hero from './components/hero/Hero'
 import Nav from './components/navbar/Nav'
@@ -7,14 +7,13 @@ import type { ProductType } from './components/types/types'
 import Products from './components/Products'
 
 const productPromiseData = async () :Promise<ProductType[]> => {
-  const response = await fetch ("/public/data.json")
+  const response = await fetch ("/data.json")
   const data = await response.json()
   return data
 }
 
 function App() {
 
-  const [productPromise] = useState(()=> productPromiseData())
 
 
   return (
